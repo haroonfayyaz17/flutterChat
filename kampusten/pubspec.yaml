@@ -49,6 +49,8 @@ flutter:
     - images/facebook.png
     - images/add.jpg
     - images/minus.jpg
+    - images/englishbook.jpeg
+    - images/header.jpeg
 
   fonts:
     - family: Montserrat

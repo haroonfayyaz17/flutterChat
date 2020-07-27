@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:kampusten/AppDrawerClass.dart';
+import 'package:kampusten/OtoStopWhere.dart';
+import 'package:kampusten/otoStop7.dart';
 import 'Items.dart';
-
-void main() {
-  runApp(Marketposts());
-}
+import 'AppBarClass.dart';
 
 class Marketposts extends StatelessWidget {
   @override
@@ -14,6 +14,7 @@ class Marketposts extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: const Color(0xff7755a4),
+        accentColor: const Color(0xff7755a4),
       ),
       home: _Marketposts(),
     );
@@ -27,10 +28,19 @@ class _Marketposts extends StatefulWidget {
 
 class _Marketposts_ extends State<_Marketposts> {
   int _currentTabIndex = 0;
-
+  GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  AppBarClass appBarClass;
+  AppDrawerClass appDrawerClass;
+  OtoStop7Class otoStop7Class;
+  OtoStopWhere otoStopWhere;
 //TODO: Bottom Navigation Bar
   @override
   Widget build(BuildContext context) {
+    appBarClass = new AppBarClass();
+    appDrawerClass = new AppDrawerClass();
+    otoStop7Class = new OtoStop7Class();
+    otoStopWhere=new OtoStopWhere();
+    _scaffoldKey = appBarClass.scaffoldKey;
     List<Items> item = [
       Items(
         path: 'images/englishbook.jpeg',
@@ -54,70 +64,472 @@ class _Marketposts_ extends State<_Marketposts> {
       ),
     ];
 
+    List<String> item_Catgories = [
+      'Books & Stationery',
+      'Things for Dormitary Room',
+      'Electronics',
+      'Lecture Notes',
+      'All Things',
+    ];
+
     final _pages = <Widget>[
       Container(
-        margin: EdgeInsets.fromLTRB(5, 30, 0, 10),
-        child: Column(
+        color: Colors.white,
+        child: SingleChildScrollView(
+          child: Column(
             children: <Widget>[
-          Row(
-            children: <Widget>[
-              Container(
-                  child: Builder(builder: (BuildContext innerContext) {
-                return IconButton(
-                    icon: Icon(
-                      Icons.short_text,
-                      color: const Color(0xff7755a4),
-                      size: 50,
-                    ),
-                    onPressed: () {
-                      Scaffold.of(innerContext).openDrawer();
-                    });
-              })),
-              Container(
-                height: 40,
-                margin: EdgeInsets.fromLTRB(20, 0, 0, 0),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Color(0xff7755a4),
-                    width: 1,
-                  ),
-                  borderRadius: BorderRadius.all(
-                      Radius.circular(70.0)), // set rounded corner radius
-                ),
-                width: 280,
-                child: TextField(
-                  textAlign: TextAlign.center,
-                  cursorColor: const Color(0xff7755a4),
-                  keyboardType: TextInputType.text,
-                  maxLines: 1,
-                  decoration: InputDecoration.collapsed(
-                    hintText: 'What do you want to buy?',
-                  ),
-
-                  onSubmitted: (val) {
-                    //TODO: search text
-                  },
-                ),
+              SizedBox(
+                height: 20.0,
               ),
-              Container(
-                padding: EdgeInsets.fromLTRB(10, 5, 0, 0),
-                child: IconButton(
-                  icon: Icon(
-                    Icons.comment,
-                    color: const Color(0xff7755a4),
-                    size: 30,
-                  ),
-                  onPressed: () {
-                    //TODO: Open messages
-                  },
+              Text(
+                'Welcome, Name',
+                style: TextStyle(
+                  fontFamily: 'Josefin Sans',
+                  fontSize: 28,
+                  color: const Color(0xff7755a4),
+                  fontWeight: FontWeight.w700,
                 ),
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.visible,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    constraints: BoxConstraints(
+                      minWidth: 350,
+                      maxWidth: MediaQuery.of(context).size.width - 40,
+                    ),
+                    margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                    decoration: BoxDecoration(
+                      color: Color(0xFFF9B6A3),
+                      borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                    ),
+                    padding: EdgeInsets.all(10),
+                    child: InkWell(
+                      child: Column(
+                        children: <Widget>[
+                          Text(
+                            'Events',
+                            style: TextStyle(
+                              fontFamily: 'Josefin Sans',
+                              fontSize: 30,
+                              color: const Color(0xff5d4b86),
+                              fontWeight: FontWeight.w700,
+                            ),
+                            textAlign: TextAlign.center,
+                            overflow: TextOverflow.visible,
+                          ),
+                          Text(
+                            'MFÖ Concert',
+                            style: TextStyle(
+                              fontFamily: 'Josefin Sans',
+                              fontSize: 39,
+                              color: const Color(0xff5d4b86),
+                              height: 1.064516129032258,
+                            ),
+                            textAlign: TextAlign.center,
+                            overflow: TextOverflow.visible,
+                          ),
+                          Text(
+                            '24 January - 20:00',
+                            style: TextStyle(
+                              fontFamily: 'Josefin Sans',
+                              fontSize: 31,
+                              color: const Color(0xff5d4b86),
+                              height: 1.064516129032258,
+                            ),
+                          ),
+                        ],
+                      ),
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                content: Container(
+                                  height: 200,
+                                  constraints: BoxConstraints(
+                                    minHeight: 200,
+                                    maxHeight:
+                                        MediaQuery.of(context).size.height - 40,
+                                  ),
+                                  child: Column(
+                                    children: <Widget>[
+                                      Text(
+                                        'Date change of Online Summit of Economy Club',
+                                        style: TextStyle(
+                                          fontFamily: 'Josefin Sans',
+                                          fontSize: 21,
+                                          color: const Color(0xff5d4b86),
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                        textAlign: TextAlign.left,
+                                        overflow: TextOverflow.visible,
+                                      ),
+                                      Text(
+                                        'Because of the change in exam dates, online summit is postponed to 12 January 18.00',
+                                        style: TextStyle(
+                                          fontFamily: 'Josefin Sans',
+                                          fontSize: 19,
+                                          color: const Color(0xff5d4b86),
+                                        ),
+                                        textAlign: TextAlign.left,
+                                        overflow: TextOverflow.visible,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            });
+                      },
+                    ),
+                  )
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  InkWell(
+                    child: Container(
+                      constraints: BoxConstraints(
+                        minWidth: 350,
+                        maxWidth: MediaQuery.of(context).size.width - 40,
+                      ),
+                      margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                      decoration: BoxDecoration(
+                        color: Color(0xFFD1D4FD),
+                        borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                      ),
+                      padding: EdgeInsets.all(10),
+                      child: Column(
+                        children: <Widget>[
+                          Text(
+                            'News from Campus',
+                            style: TextStyle(
+                              fontFamily: 'Josefin Sans',
+                              fontSize: 26,
+                              color: const Color(0xff7755a4),
+                              fontWeight: FontWeight.w700,
+                            ),
+                            textAlign: TextAlign.center,
+                            overflow: TextOverflow.visible,
+                          ),
+                          Text(
+                            'There will be opened additional quota for some Computer Science lectures.',
+                            style: TextStyle(
+                              fontFamily: 'Josefin Sans',
+                              fontSize: 21,
+                              color: const Color(0xff5d4b86),
+                            ),
+                            textAlign: TextAlign.center,
+                            overflow: TextOverflow.visible,
+                          ),
+                        ],
+                      ),
+                    ),
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              content: Container(
+                                height: 200,
+                                constraints: BoxConstraints(
+                                  minHeight: 200,
+                                  maxHeight:
+                                      MediaQuery.of(context).size.height - 40,
+                                ),
+                                child: Column(
+                                  children: <Widget>[
+                                    Text(
+                                      'Date change of Online Summit of Economy Club',
+                                      style: TextStyle(
+                                        fontFamily: 'Josefin Sans',
+                                        fontSize: 21,
+                                        color: const Color(0xff5d4b86),
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                      textAlign: TextAlign.left,
+                                      overflow: TextOverflow.visible,
+                                    ),
+                                    Text(
+                                      'Because of the change in exam dates, online summit is postponed to 12 January 18.00',
+                                      style: TextStyle(
+                                        fontFamily: 'Josefin Sans',
+                                        fontSize: 19,
+                                        color: const Color(0xff5d4b86),
+                                      ),
+                                      textAlign: TextAlign.left,
+                                      overflow: TextOverflow.visible,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          });
+                    },
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  InkWell(
+                    child: Container(
+                      constraints: BoxConstraints(
+                        minWidth: 350,
+                        maxWidth: MediaQuery.of(context).size.width - 40,
+                      ),
+                      margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                      decoration: BoxDecoration(
+                        color: Color(0xFFFEEFD2),
+                        borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                      ),
+                      padding: EdgeInsets.all(10),
+                      child: Column(
+                        children: <Widget>[
+                          Text(
+                            'Announcments',
+                            style: TextStyle(
+                              fontFamily: 'Josefin Sans',
+                              fontSize: 30,
+                              color: const Color(0xff5d4b86),
+                              fontWeight: FontWeight.w700,
+                            ),
+                            textAlign: TextAlign.center,
+                            overflow: TextOverflow.visible,
+                          ),
+                          Text(
+                            'Date change of OnlineSummmit of Economy Club',
+                            style: TextStyle(
+                              fontFamily: 'Josefin Sans',
+                              fontSize: 24,
+                              color: const Color(0xff5d4b86),
+                            ),
+                            textAlign: TextAlign.center,
+                            overflow: TextOverflow.visible,
+                          ),
+                        ],
+                      ),
+                    ),
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              content: Container(
+                                height: 200,
+                                constraints: BoxConstraints(
+                                  minHeight: 200,
+                                  maxHeight:
+                                      MediaQuery.of(context).size.height - 40,
+                                ),
+                                child: Column(
+                                  children: <Widget>[
+                                    Text(
+                                      'Date change of Online Summit of Economy Club',
+                                      style: TextStyle(
+                                        fontFamily: 'Josefin Sans',
+                                        fontSize: 21,
+                                        color: const Color(0xff5d4b86),
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                      textAlign: TextAlign.left,
+                                      overflow: TextOverflow.visible,
+                                    ),
+                                    Text(
+                                      'Because of the change in exam dates, online summit is postponed to 12 January 18.00',
+                                      style: TextStyle(
+                                        fontFamily: 'Josefin Sans',
+                                        fontSize: 19,
+                                        color: const Color(0xff5d4b86),
+                                      ),
+                                      textAlign: TextAlign.left,
+                                      overflow: TextOverflow.visible,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          });
+                    },
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  InkWell(
+                    child: Container(
+                      constraints: BoxConstraints(
+                        minWidth: 350,
+                        maxWidth: MediaQuery.of(context).size.width - 40,
+                      ),
+                      margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                      decoration: BoxDecoration(
+                        color: Color(0xFFF9B6A3),
+                        borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                      ),
+                      padding: EdgeInsets.all(10),
+                      child: Column(
+                        children: <Widget>[
+                          Text(
+                            'Events',
+                            style: TextStyle(
+                              fontFamily: 'Josefin Sans',
+                              fontSize: 30,
+                              color: const Color(0xff5d4b86),
+                              fontWeight: FontWeight.w700,
+                            ),
+                            textAlign: TextAlign.center,
+                            overflow: TextOverflow.visible,
+                          ),
+                          Text(
+                            'Let\'s change school bus firm.',
+                            style: TextStyle(
+                              fontFamily: 'Josefin Sans',
+                              fontSize: 33,
+                              color: const Color(0xff5d4b86),
+                            ),
+                            textAlign: TextAlign.center,
+                            overflow: TextOverflow.visible,
+                          ),
+                        ],
+                      ),
+                    ),
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              content: Container(
+                                height: 200,
+                                constraints: BoxConstraints(
+                                  minHeight: 200,
+                                  maxHeight:
+                                      MediaQuery.of(context).size.height - 40,
+                                ),
+                                child: Column(
+                                  children: <Widget>[
+                                    Text(
+                                      'Date change of Online Summit of Economy Club',
+                                      style: TextStyle(
+                                        fontFamily: 'Josefin Sans',
+                                        fontSize: 21,
+                                        color: const Color(0xff5d4b86),
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                      textAlign: TextAlign.left,
+                                      overflow: TextOverflow.visible,
+                                    ),
+                                    Text(
+                                      'Because of the change in exam dates, online summit is postponed to 12 January 18.00',
+                                      style: TextStyle(
+                                        fontFamily: 'Josefin Sans',
+                                        fontSize: 19,
+                                        color: const Color(0xff5d4b86),
+                                      ),
+                                      textAlign: TextAlign.left,
+                                      overflow: TextOverflow.visible,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          });
+                    },
+                  ),
+                ],
               ),
             ],
           ),
+        ),
+      ),
+      Container(
+        color: Colors.white,
+        child: Column(
+          children: <Widget>[
+            SizedBox(
+              height: 20.0,
+            ),
+            Text(
+              'Whatever you need, buy it from campus.',
+              style: TextStyle(
+                fontFamily: 'Josefin Sans',
+                fontSize: 33,
+                color: const Color(0xff7755a4),
+                fontWeight: FontWeight.w700,
+              ),
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.visible,
+            ),
+            Flexible(
+              child: SingleChildScrollView(
+                child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: item_Catgories.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      var temp_item_category = item_Catgories.elementAt(index);
+                      return InkWell(
+                          child: Container(
+                              constraints: BoxConstraints(
+                                minWidth: 350,
+                                maxWidth:
+                                    MediaQuery.of(context).size.width - 40,
+                              ),
+                              height: 100,
+                              margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                              decoration: BoxDecoration(
+                                color: getColor(index),
+                                //color: Color(0xFFF9B6A3),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30.0)),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  temp_item_category,
+                                  style: TextStyle(
+                                    fontFamily: 'Josefin Sans',
+                                    fontSize: 26,
+                                    color: const Color(0xff4f3c75),
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  textAlign: TextAlign.left,
+                                ),
+                              )),
+                          onTap: () {
+                            _currentTabIndex = 5;
+                          });
+                    }),
+              ),
+            ),
+          ],
+        ),
+      ),
+//      Center(child: Text('Oto Stop body')),
+      otoStopWhere.getOtoStopWhere(context),
+      Container(
+        color: Colors.white,
+        padding: EdgeInsets.all(10.0),
+        child: Column(children: <Widget>[
           Row(
             children: <Widget>[
               Container(
-                margin: EdgeInsets.fromLTRB(20, 0, 0, 0),
                 child: Text(
                   'Products from All Things Category: ',
                   style: TextStyle(
@@ -198,8 +610,8 @@ class _Marketposts_ extends State<_Marketposts> {
                             builder: (BuildContext context) {
                               return AlertDialog(
                                 shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
                                 content: Container(
                                   constraints: BoxConstraints.expand(
                                     height: 450,
@@ -335,9 +747,6 @@ class _Marketposts_ extends State<_Marketposts> {
           ),
         ]),
       ),
-      Center(child: Text('Market')),
-      Center(child: Text('Settings')),
-      Center(child: Text('Search')),
     ];
 
     final barItems = <BottomNavigationBarItem>[
@@ -350,8 +759,8 @@ class _Marketposts_ extends State<_Marketposts> {
         title: Text('Market'),
       ),
       BottomNavigationBarItem(
-        icon: Icon(Icons.settings),
-        title: Text('Setting'),
+        icon: Icon(Icons.local_taxi),
+        title: Text('oto stop'),
       ),
       BottomNavigationBarItem(
         icon: Icon(Icons.search),
@@ -370,10 +779,12 @@ class _Marketposts_ extends State<_Marketposts> {
       },
     );
     return Scaffold(
+      key: _scaffoldKey,
       resizeToAvoidBottomPadding: false,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           //TODO: Floating Action Button
+          performAction(_currentTabIndex);
         },
         child: Icon(
           Icons.add,
@@ -381,78 +792,186 @@ class _Marketposts_ extends State<_Marketposts> {
         ),
         backgroundColor: Colors.white,
       ),
-      drawer: Drawer(
-        child: Container(
-          color: const Color(0xff5d4b86),
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: <Widget>[
-              UserAccountsDrawerHeader(
-                  decoration: BoxDecoration(color: Color(0xff5d4b86)),
-
-                  // currentAccountPicture: CircleAvatar(backgroundImage: ExactAssetImage("assets/header.jpg"),),
-                  currentAccountPicture: new CircleAvatar(
-                    radius: 100,
-                    backgroundColor: const Color(0xFF778899),
-                    child: Image.asset("images/header.jpeg"),
-                  ),
-                  accountName: Text(
-                    "Name",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  accountEmail: Text(
-                    "Surname",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  )),
-              ListTile(
-                title: Text(
-                  "Profile",
-                  style: TextStyle(
-                      fontFamily: 'Josefin Sans',
-                      fontSize: 20,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
-                ),
-                onTap: () {
-                  Navigator.pop(context);
-                  //your code here
-                },
-              ),
-              ListTile(
-                title: Text(
-                  "Settings",
-                  style: TextStyle(
-                      fontFamily: 'Josefin Sans',
-                      fontSize: 20,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
-                ),
-                onTap: () {
-                  Navigator.pop(context);
-                  //your code here
-                },
-              ),
-              ListTile(
-                title: Text(
-                  "Post & Trips",
-                  style: TextStyle(
-                      fontFamily: 'Josefin Sans',
-                      fontSize: 20,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
-                ),
-                onTap: () {
-                  Navigator.pop(context);
-                  //your code here
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
+      appBar: appBarClass.getAppBar(_currentTabIndex),
+      drawer: appDrawerClass.getAppDrawerClass(context),
       body: _pages[_currentTabIndex],
       bottomNavigationBar: bottomNavBar,
     );
   }
+
+  void performAction(_pageNo) {
+    List<String> categories = <String>[
+      "Event",
+      "News from Campus",
+      "Announcement",
+      "Bus Route",
+    ];
+
+    List<DropdownMenuItem<String>> _dropDownMenuItems = categories
+        .map(
+          (String value) => DropdownMenuItem<String>(
+            value: value,
+            child: Text(value),
+          ),
+        )
+        .toList();
+
+    if (_pageNo == 0) {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            var _selectedCategory;
+            return AlertDialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              content: SingleChildScrollView(
+                child: Container(
+                  height: 600,
+                  constraints: BoxConstraints(
+                    minHeight: 500,
+                    maxHeight: MediaQuery.of(context).size.height - 40,
+                    maxWidth: MediaQuery.of(context).size.width - 40,
+                  ),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: <Widget>[
+                        Text(
+                          'Write details about your announcment, if it is confirmed it will be published',
+                          style: TextStyle(
+                            fontFamily: 'Josefin Sans',
+                            fontSize: 21,
+                            color: const Color(0xff5d4b86),
+                            fontWeight: FontWeight.w700,
+                          ),
+                          textAlign: TextAlign.center,
+                          overflow: TextOverflow.visible,
+                        ),
+                        Container(
+                          width: 100,
+                          child: ListTile(
+                            trailing: DropdownButton<String>(
+                              hint: Container(
+                                  width: 220,
+                                  child: Text("Category",
+                                      textAlign: TextAlign.left)),
+                              value: _selectedCategory,
+                              onChanged: (String newValue) {
+                                setState(() {
+                                  _selectedCategory = newValue;
+                                });
+                              },
+                              items: _dropDownMenuItems,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                          child: TextFormField(
+                            textCapitalization: TextCapitalization.words,
+                            decoration: InputDecoration(
+                              border: UnderlineInputBorder(),
+                              filled: true,
+                              labelText: 'Title',
+                            ),
+                            onSaved: (String value) {
+                              //TODO: title of event
+                            },
+                          ),
+                        ),
+                        Container(
+                          child: Text(
+                            'Description',
+                            style: TextStyle(
+                              fontFamily: 'Josefin Sans',
+                              fontSize: 22,
+                              color: const Color(0xff4f3c75),
+                            ),
+                            textAlign: TextAlign.left,
+                            overflow: TextOverflow.visible,
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.fromLTRB(0, 5, 0, 5),
+                          child: TextField(
+                            maxLines: 10,
+                            textCapitalization: TextCapitalization.sentences,
+                            decoration: InputDecoration(
+                              hintText: 'Add descripion',
+                              border: OutlineInputBorder(),
+                            ),
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              margin: EdgeInsets.all(10.0),
+                              decoration: BoxDecoration(
+                                color: Color(0xFFF3EFFD),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                              ),
+                              child: FlatButton(
+                                child: Text(
+                                  'Confirm',
+                                  style: TextStyle(
+                                    fontFamily: 'Josefin Sans',
+                                    fontSize: 18,
+                                    color: const Color(0xff4f3c75),
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  textAlign: TextAlign.left,
+                                  overflow: TextOverflow.visible,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.all(10.0),
+                              decoration: BoxDecoration(
+                                color: Color(0xFF4D3D71),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                              ),
+                              child: FlatButton(
+                                child: Text(
+                                  'Cancel',
+                                  style: TextStyle(
+                                    fontFamily: 'Josefin Sans',
+                                    fontSize: 18,
+                                    color: const Color(0xffe0d7f6),
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  textAlign: TextAlign.left,
+                                  overflow: TextOverflow.visible,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            );
+          });
+    }
+  }
 }
 
+getColor(int index) {
+  int i = index % 5;
+  if (i == 0) {
+    return Color(0xFFFEEED5);
+  } else if (i == 1) {
+    return Color(0xFFF9B6A3);
+  } else if (i == 2) {
+    return Color(0xFFFCE3E6);
+  } else if (i == 3) {
+    return Color(0xFFC8B5F3);
+  } else if (i == 4) {
+    return Color(0xFFD4D7FF);
+  }
+}
