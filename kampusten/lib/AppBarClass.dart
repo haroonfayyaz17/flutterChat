@@ -76,30 +76,32 @@ class AppBarClass {
             ),
           ),
           backgroundColor: Colors.white,
-          title: Container(
-            alignment: Alignment.topCenter,
-            height: 50,
-            margin: EdgeInsets.fromLTRB(0,5,0,0),
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: Color(0xff7755a4),
-                width: 1,
+          title: Center(
+            child: Container(
+              //alignment: Alignment.topCenter,
+              height: 50,
+              margin: EdgeInsets.fromLTRB(0,5,0,0),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Color(0xff7755a4),
+                  width: 1,
+                ),
+                borderRadius: BorderRadius.all(
+                    Radius.circular(70.0)), // set rounded corner radius
               ),
-              borderRadius: BorderRadius.all(
-                  Radius.circular(70.0)), // set rounded corner radius
-            ),
-            width: 280,
-            child: TextField(
-              textAlign: TextAlign.center,
-              cursorColor: const Color(0xff7755a4),
-              keyboardType: TextInputType.text,
-              maxLines: null,
-              decoration: InputDecoration.collapsed(
-                hintText: 'What do you want to buy?',
+              width: 280,
+              child: TextField(
+                textAlign: TextAlign.center,
+                cursorColor: const Color(0xff7755a4),
+                keyboardType: TextInputType.text,
+                maxLines: null,
+                decoration: InputDecoration.collapsed(
+                  hintText: 'What do you want to buy?',
+                ),
+                onSubmitted: (val) {
+                  //TODO: search text
+                },
               ),
-              onSubmitted: (val) {
-                //TODO: search text
-              },
             ),
           ),
           actions: <Widget>[

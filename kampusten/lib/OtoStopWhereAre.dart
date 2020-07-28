@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kampusten/AppBarClass.dart';
 import 'package:kampusten/AppDrawerClass.dart';
+import 'package:kampusten/OtoStopWhere.dart';
 import 'package:kampusten/OtoStopWhereAre.dart';
 
 import 'otostop2.dart';
@@ -33,7 +34,7 @@ class _OtoStop1State extends State<OtoStop1> {
   @override
   Widget build(BuildContext context) {
     otoStopWhereAre = new OtoStopWhereAre();
-    appDrawerClass=new AppDrawerClass();
+    appDrawerClass = new AppDrawerClass();
     appBarClass = new AppBarClass();
     _scaffoldKey = appBarClass.scaffoldKey;
     Scaffold scaffold = new Scaffold(
@@ -100,106 +101,107 @@ class OtoStopWhereAre {
 
   getOtoStopWhere(BuildContext context) {
     print('yes');
-    return Column(
-      children: <Widget>[
-        Container(
-          alignment: Alignment.center,
-          margin: EdgeInsets.only(top: 65),
-          child: Text(
-            'Search where you\nwanna go,\nDo not go alone!',
-            style: TextStyle(
-              fontFamily: 'Josefin Sans',
-              fontSize: 32,
-              color: const Color(0xff7755a4),
-              fontWeight: FontWeight.w600,
-              shadows: [
-                Shadow(
-                  color: const Color(0x29000000),
-                  offset: Offset(0, 3),
-                  blurRadius: 6,
-                )
-              ],
-            ),
-          ),
-        ),
-        getDropDownMenu(context),
-        Stack(
-          alignment: Alignment.center,
-          children: <Widget>[
-            /*From campus container*/
-            new Positioned(
-              child: Container(
-                margin: const EdgeInsets.fromLTRB(0.0, 25.0, 100, 0.0),
-                padding: const EdgeInsets.fromLTRB(0, 14.0, 25, 0.0),
-                width: 138.0,
-                height: 33.0,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16.0),
-                  color: const Color(0xff5d4b86),
-                ),
-                //color: const Color(0xffe0d7f6),
-                //color: const Color(0xff5d4b86),
-                child: FlatButton(
-                  padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                  child: Text(
-                    'from campus',
-                    style: TextStyle(
-                      fontFamily: 'Josefin Sans',
-                      fontSize: 16,
-                      color: const Color(0xffe0d7f6),
-                      fontWeight: FontWeight.w600,
-                      height: 0.5,
-                    ),
-                    textAlign: TextAlign.left,
-                  ),
-                  onPressed: () {
-                    /*otoStopWhereAre=new  OtoStopWhereAre();
-                    print(otoStopWhereAre);
-                    otoStopWhereAre.getOtoStopWhere(context);*/
-                  },
-                ),
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Container(
+            child: Text(
+              'Search where you\nwanna go,\nDo not go alone!',
+              style: TextStyle(
+                fontFamily: 'Josefin Sans',
+                fontSize: 32,
+                color: const Color(0xff7755a4),
+                fontWeight: FontWeight.w600,
+                shadows: [
+                  Shadow(
+                    color: const Color(0x29000000),
+                    offset: Offset(0, 3),
+                    blurRadius: 6,
+                  )
+                ],
               ),
             ),
-            new Positioned(
-              /*To Campus Container*/
-              child: Container(
-                margin: const EdgeInsets.fromLTRB(95, 25.0, 0.0, 0.0),
-                padding: const EdgeInsets.fromLTRB(0, 14.0, 20, 0.0),
-                width: 115.0,
-                height: 33.0,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16.0),
-                  color: const Color(0xffe0d7f6),
-                ),
-                //color: const Color(0xff5d4b86),
-                //color: const Color(0xffe0d7f6),
-                child: SizedBox(
-                  width: 120.0,
+          ),
+          getDropDownMenu(context),
+          Stack(
+            alignment: Alignment.center,
+            children: <Widget>[
+              /*From campus container*/
+              new Positioned(
+                child: Container(
+                  margin: const EdgeInsets.fromLTRB(0.0, 25.0, 100, 0.0),
+                  padding: const EdgeInsets.fromLTRB(0, 14.0, 25, 0.0),
+                  width: 138.0,
+                  height: 33.0,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16.0),
+                    color: const Color(0xff5d4b86),
+                  ),
+                  //color: const Color(0xffe0d7f6),
+                  //color: const Color(0xff5d4b86),
                   child: FlatButton(
                     padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
                     child: Text(
-                      'to campus',
+                      'from campus',
                       style: TextStyle(
                         fontFamily: 'Josefin Sans',
                         fontSize: 16,
-                        color: const Color(0xff5d4b86),
+                        color: const Color(0xffe0d7f6),
                         fontWeight: FontWeight.w600,
                         height: 0.5,
                       ),
                       textAlign: TextAlign.left,
                     ),
                     onPressed: () {
-                      /* otoStopWhereAre=new  OtoStopWhereAre();
-                        print(otoStopWhereAre);
-                        otoStopWhereAre.getOtoStopWhere(context);*/
+                      /*Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => new OtoStopWhere()));*/
                     },
                   ),
                 ),
               ),
-            ),
-          ],
-        ),
-      ],
+              new Positioned(
+                /*To Campus Container*/
+                child: Container(
+                  margin: const EdgeInsets.fromLTRB(95, 25.0, 0.0, 0.0),
+                  padding: const EdgeInsets.fromLTRB(0, 14.0, 20, 0.0),
+                  width: 115.0,
+                  height: 33.0,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16.0),
+                    color: const Color(0xffe0d7f6),
+                  ),
+                  //color: const Color(0xff5d4b86),
+                  //color: const Color(0xffe0d7f6),
+                  child: SizedBox(
+                    width: 120.0,
+                    child: FlatButton(
+                      padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
+                      child: Text(
+                        'to campus',
+                        style: TextStyle(
+                          fontFamily: 'Josefin Sans',
+                          fontSize: 16,
+                          color: const Color(0xff5d4b86),
+                          fontWeight: FontWeight.w600,
+                          height: 0.5,
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+                      onPressed: () {
+                        /* otoStopWhereAre=new  OtoStopWhereAre();
+                          print(otoStopWhereAre);
+                          otoStopWhereAre.getOtoStopWhere(context);*/
+                      },
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

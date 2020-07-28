@@ -49,7 +49,7 @@ class OtoStopWhere {
         },
         items: _Cities.map((city) {
           return DropdownMenuItem(
-            child: new Text(city),
+            child: Container(alignment: Alignment.center,child: new Text(city)),
             value: city,
           );
         }).toList(),
@@ -58,103 +58,106 @@ class OtoStopWhere {
   }
 
   getOtoStopWhere(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Container(
-          alignment: Alignment.center,
-          margin: EdgeInsets.only(top: 65),
-          child: Text(
-            'Search where you\nwanna go,\nDo not go alone!',
-            style: TextStyle(
-              fontFamily: 'Josefin Sans',
-              fontSize: 32,
-              color: const Color(0xff7755a4),
-              fontWeight: FontWeight.w600,
-              shadows: [
-                Shadow(
-                  color: const Color(0x29000000),
-                  offset: Offset(0, 3),
-                  blurRadius: 6,
-                )
-              ],
+    return Center(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Container(
+            alignment: Alignment.center,
+            child: Text(
+              'Search where you\nwanna go,\nDo not go alone!',
+              style: TextStyle(
+                fontFamily: 'Josefin Sans',
+                fontSize: 32,
+                color: const Color(0xff7755a4),
+                fontWeight: FontWeight.w600,
+                shadows: [
+                  Shadow(
+                    color: const Color(0x29000000),
+                    offset: Offset(0, 3),
+                    blurRadius: 6,
+                  )
+                ],
+              ),
             ),
           ),
-        ),
-        getDropDownMenu(context),
-        Stack(
-          alignment: Alignment.center,
-          children: <Widget>[
-            new Positioned(
-              /*To Campus Container*/
-              child: Container(
-                  margin: const EdgeInsets.fromLTRB(95, 25.0, 0.0, 0.0),
-                  padding: const EdgeInsets.fromLTRB(30, 14.0, 0.0, 0.0),
+          getDropDownMenu(context),
+          Stack(
+            alignment: Alignment.center,
+            children: <Widget>[
+              new Positioned(
+                /*To Campus Container*/
+                child: Container(
+                    margin: const EdgeInsets.fromLTRB(95, 25.0, 0.0, 0.0),
+                    padding: const EdgeInsets.fromLTRB(30, 14.0, 0.0, 0.0),
+                    width: 128.0,
+                    height: 33.0,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16.0),
+                      color: const Color(0xff5d4b86),
+                    ),
+                    child: SizedBox(
+                      width: 120.0,
+                      child: FlatButton(
+                        padding: EdgeInsets.fromLTRB(0,0,0,10),
+                        child: Text(
+                          'to campus',
+                          style: TextStyle(
+                            fontFamily: 'Josefin Sans',
+                            fontSize: 16,
+                            color: const Color(0xffe0d7f6),
+                            fontWeight: FontWeight.w600,
+                            height: 0.5,
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).push(
+                              MaterialPageRoute(builder: (context) =>new OtoStop1State()));
+                        },
+                      ),
+                    ),
+                ),
+              ),
+
+              /*From campus container*/
+              new Positioned(
+                child: Container(
+                  margin: const EdgeInsets.fromLTRB(0.0, 25.0, 100, 0.0),
+                  padding: const EdgeInsets.fromLTRB(5, 14.0, 0.0, 0.0),
                   width: 128.0,
                   height: 33.0,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16.0),
-                    color: const Color(0xff5d4b86),
+                    color: const Color(0xffe0d7f6),
                   ),
-                  child: SizedBox(
-                    width: 120.0,
-                    child: FlatButton(
-                      padding: EdgeInsets.fromLTRB(0,0,0,10),
-                      child: Text(
-                        'to campus',
-                        style: TextStyle(
-                          fontFamily: 'Josefin Sans',
-                          fontSize: 16,
-                          color: const Color(0xffe0d7f6),
-                          fontWeight: FontWeight.w600,
-                          height: 0.5,
-                        ),
-                        textAlign: TextAlign.left,
+                  child:  FlatButton(
+                    padding: EdgeInsets.fromLTRB(0,0,0,10),
+                    child: Text(
+                      'from campus',
+                      style: TextStyle(
+                        fontFamily: 'Josefin Sans',
+                        fontSize: 16,
+                        color: const Color(0xff5d4b86),
+                        fontWeight: FontWeight.w600,
+                        height: 0.5,
                       ),
-                      onPressed: () {
-                        Navigator.of(context).push(
-                            MaterialPageRoute(builder: (context) =>new OtoStop1State()));
-                      },
+                      textAlign: TextAlign.left,
                     ),
-                  ),
-              ),
-            ),
+                    onPressed: () {
+                      print('yes');
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) =>new OtoStop3State()));
 
-            /*From campus container*/
-            new Positioned(
-              child: Container(
-                margin: const EdgeInsets.fromLTRB(0.0, 25.0, 100, 0.0),
-                padding: const EdgeInsets.fromLTRB(5, 14.0, 0.0, 0.0),
-                width: 128.0,
-                height: 33.0,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16.0),
-                  color: const Color(0xffe0d7f6),
-                ),
-                child:  FlatButton(
-                  padding: EdgeInsets.fromLTRB(0,0,0,10),
-                  child: Text(
-                    'from campus',
-                    style: TextStyle(
-                      fontFamily: 'Josefin Sans',
-                      fontSize: 16,
-                      color: const Color(0xff5d4b86),
-                      fontWeight: FontWeight.w600,
-                      height: 0.5,
-                    ),
-                    textAlign: TextAlign.left,
+                    },
                   ),
-                  onPressed: () {
-                    print('yes');
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) =>new OtoStop3State()));
-
-                  },
                 ),
               ),
-            ),
-          ],
-        ),
-      ],
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
