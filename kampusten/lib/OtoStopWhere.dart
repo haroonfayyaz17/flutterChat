@@ -6,7 +6,7 @@ import 'package:kampusten/otoStop7.dart';
 import 'otostop2.dart';
 import 'OtoStopWhereAre.dart';
 
-class OtoStopWhere {
+class OtoStopWhere extends StatelessWidget{
   List<String> _Cities;
   String _selectedGender;
   final _genderController = TextEditingController();
@@ -57,7 +57,9 @@ class OtoStopWhere {
     );
   }
 
-  getOtoStopWhere(BuildContext context) {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
     return Center(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -89,35 +91,35 @@ class OtoStopWhere {
               new Positioned(
                 /*To Campus Container*/
                 child: Container(
-                    margin: const EdgeInsets.fromLTRB(95, 25.0, 0.0, 0.0),
-                    padding: const EdgeInsets.fromLTRB(30, 14.0, 0.0, 0.0),
-                    width: 128.0,
-                    height: 33.0,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16.0),
-                      color: const Color(0xff5d4b86),
-                    ),
-                    child: SizedBox(
-                      width: 120.0,
-                      child: FlatButton(
-                        padding: EdgeInsets.fromLTRB(0,0,0,10),
-                        child: Text(
-                          'to campus',
-                          style: TextStyle(
-                            fontFamily: 'Josefin Sans',
-                            fontSize: 16,
-                            color: const Color(0xffe0d7f6),
-                            fontWeight: FontWeight.w600,
-                            height: 0.5,
-                          ),
-                          textAlign: TextAlign.left,
+                  margin: const EdgeInsets.fromLTRB(95, 25.0, 0.0, 0.0),
+                  padding: const EdgeInsets.fromLTRB(30, 14.0, 0.0, 0.0),
+                  width: 128.0,
+                  height: 33.0,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16.0),
+                    color: const Color(0xff5d4b86),
+                  ),
+                  child: SizedBox(
+                    width: 120.0,
+                    child: FlatButton(
+                      padding: EdgeInsets.fromLTRB(0,0,0,10),
+                      child: Text(
+                        'to campus',
+                        style: TextStyle(
+                          fontFamily: 'Josefin Sans',
+                          fontSize: 16,
+                          color: const Color(0xffe0d7f6),
+                          fontWeight: FontWeight.w600,
+                          height: 0.5,
                         ),
-                        onPressed: () {
-                          Navigator.of(context).push(
-                              MaterialPageRoute(builder: (context) =>new OtoStop1State()));
-                        },
+                        textAlign: TextAlign.left,
                       ),
+                      onPressed: () {
+                        Navigator.of(context).push(
+                            MaterialPageRoute(builder: (context) =>new OtoStop1State()));
+                      },
                     ),
+                  ),
                 ),
               ),
 
